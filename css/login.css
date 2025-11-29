@@ -1,0 +1,48 @@
+/* 1. Convierte el formulario en el contenedor principal */
+#login-form {
+    display: flex;
+    flex-direction: column;
+    /* Esta es la propiedad clave para el espacio entre los divs */
+    gap: 1.25rem; /* Ajusta este valor a tu gusto (ej. 20px) */
+  }
+  
+  /* 2. Haz que los inputs y botones llenen su contenedor */
+  #login-form input,
+  #login-form .btn {
+    width: 100%;
+    /* Buena práctica para que el padding y borde no afecten el ancho total */
+    box-sizing: border-box; 
+  }
+  
+  /* 3. Estilos que ya tenías (solo como referencia) */
+  input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .06);
+    color: #f8fafc;
+    outline: none;
+    font-size: 1rem;
+  }
+  
+  .btn {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: #111827;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .card {
+    /* Reducimos el ancho máximo. Puedes jugar con este valor. */
+    max-width: 400px; 
+    
+    /* Esto asegura que la tarjeta se mantenga centrada en la pantalla */
+    margin-left: auto;
+    margin-right: auto;
+  
+    /* Estilos que ya tenías */
+    text-align: center;
+  }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist To Do</title>
+  <link rel="stylesheet" href="../css/todo.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+</head>
+<body style="background: url('../assets/FONDO-TOD.png') no-repeat center center / cover fixed;">
+  
+  <!-- HEADER -->
+  <header class="header">
+    <img src="../assets/logotodo.png" alt="Logo" class="logo" />
+    <button id="logout-btn" class="btn-logout">Logout</button>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="card container">
+      <h1>Checklist To Do</h1>
+
+      <!-- FORM NUEVA TAREA -->
+      <form id="new-todo-form" autocomplete="off">
+        <div class="row">
+          <input
+            id="new-todo-text"
+            name="text"
+            type="text"
+            placeholder="Escribe una tarea..."
+          />
+          <input
+            type="datetime-local"
+            id="new-todo-due"
+            class="datetime-input"
+          />
+          <button type="submit" class="btn btn--primary">Add</button>
+        </div>
+        <p id="todo-error" class="error" role="alert" hidden></p>
+      </form>
+
+      <!-- LISTADO -->
+      <h2 class="list-title">Tareas</h2>
+      <div id="todo-list" class="checklist" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="../js/auth.js" type="module"></script>
+  <script src="../js/storage.js" type="module"></script>
+  <script src="../js/validator.js" type="module"></script>
+  <script src="../js/api.js" type="module"></script>
+  <script src="../js/todos.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Checklist To Do</title>
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+</head>
+<body style="background: url('../assets/FONDO-TOD.png') no-repeat center center / cover fixed;">
+  
+  <!-- HEADER -->
+  <header class="header">
+    <img src="../assets/logotodo.png" alt="Logo" class="logo" />
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="card container">
+      <h1>Login</h1>
+      <form id="login-form" autocomplete="off">
+        <div class="row">
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            placeholder="Usuario" 
+            required
+          />
+        </div>
+        <div class="row">
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Contraseña" 
+            required
+          />
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn--primary">Ingresar</button>
+        </div>
+        <p id="login-error" class="error" role="alert" hidden></p>
+      </form>
+    </div>
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="../js/auth.js" type="module"></script>
+</body>
+</html>
