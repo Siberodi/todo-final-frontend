@@ -1,0 +1,27 @@
+name: Deploy to Firebase Hosting on push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate config.js from secrets
+        run: |
+          mkdir -p html
+          cat > html/config.js << 'EOF'
+          window.APP_CONFIG = {
+            SENTRY_DSN: "${{ secrets.SENTRY_DSN }}",
+            GA_MEASUREMENT_ID: "${{ secrets.GA_MEASUREMENT_ID }}"
+          };
+          EOF
+
+      - name: Deploy to Firebase Hosting
+        run: npx firebase-tools@latest deploy --only hosting --project todo-final-frontend --token "${{ secrets.FIREBASE_TOKEN }}"
