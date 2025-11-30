@@ -24,4 +24,5 @@ jobs:
           EOF
 
       - name: Deploy to Firebase Hosting
-        run: npx firebase-tools@latest deploy --only hosting --project todo-final-frontend --token "${{ secrets.FIREBASE_TOKEN }}"
+        run: npx firebase-tools@latest deploy --only hosting:todo-final-frontend-a29da --project todo-final-frontend --token "${{ secrets.FIREBASE_TOKEN }}"
+
