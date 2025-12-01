@@ -46,31 +46,33 @@
   </main>
 
   <!-- SENTRY -->
-  <!-- SDK de Sentry desde CDN (solo errores, sin tracing) -->
-<script
-  src="https://browser.sentry-cdn.com/7.120.0/bundle.min.js"
-  crossorigin="anonymous"
-></script>
-
-<!-- Tu configuración con la DSN -->
-<script src="/html/config.js"></script>
-
-<!-- Inicialización de Sentry usando window.APP_CONFIG -->
-<script>
-  if (window.APP_CONFIG && window.APP_CONFIG.SENTRY_DSN) {
-    Sentry.init({
-      dsn: window.APP_CONFIG.SENTRY_DSN,
-      // Opcional: ponle un nombre al entorno
-      environment: "production",
-    });
-  } else {
-    console.warn("Sentry: no hay SENTRY_DSN en window.APP_CONFIG");
-  }
-</script>
-
-
-  <!-- CONFIG (Sentry + GA) -->
+  <!-- 1. Configuración global (DSN + GA) -->
   <script src="./config.js"></script>
+
+  <!-- 2. SDK de Sentry desde CDN -->
+  <script
+    src="https://browser.sentry-cdn.com/7.120.0/bundle.min.js"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- 3. Inicialización de Sentry usando window.APP_CONFIG -->
+  <script>
+    console.log("APP_CONFIG en todos.html:", window.APP_CONFIG);
+
+    if (window.APP_CONFIG && window.APP_CONFIG.SENTRY_DSN) {
+      Sentry.init({
+        dsn: window.APP_CONFIG.SENTRY_DSN,
+        environment: "production",
+      });
+
+      // ⚠️ PRUEBA DIRECTA: manda un error a Sentry al cargar la página
+      Sentry.captureException(
+        new Error("Error de prueba automático desde todos.html")
+      );
+    } else {
+      console.warn("Sentry: no hay SENTRY_DSN en window.APP_CONFIG");
+    }
+  </script>
 
   <!-- GOOGLE ANALYTICS -->
   <script>
@@ -78,18 +80,21 @@
       var cfg = window.APP_CONFIG || {};
       if (!cfg.GA_MEASUREMENT_ID) return;
 
-      var gtagScript = document.createElement('script');
+      var gtagScript = document.createElement("script");
       gtagScript.async = true;
       gtagScript.src =
-        'https://www.googletagmanager.com/gtag/js?id=' + cfg.GA_MEASUREMENT_ID;
+        "https://www.googletagmanager.com/gtag/js?id=" +
+        cfg.GA_MEASUREMENT_ID;
       document.head.appendChild(gtagScript);
 
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       window.gtag = gtag;
 
-      gtag('js', new Date());
-      gtag('config', cfg.GA_MEASUREMENT_ID);
+      gtag("js", new Date());
+      gtag("config", cfg.GA_MEASUREMENT_ID);
     })();
   </script>
   
