@@ -47,10 +47,28 @@
   
 
   <!-- SENTRY -->
-  <script
-  src="https://js.sentry-cdn.com/9f9d903c2e94a4916f43cf8a952c34b1.min.js"
+  <!-- SDK de Sentry desde CDN (solo errores, sin tracing) -->
+<script
+  src="https://browser.sentry-cdn.com/7.120.0/bundle.min.js"
   crossorigin="anonymous"
 ></script>
+
+<!-- Tu configuración con la DSN -->
+<script src="/html/config.js"></script>
+
+<!-- Inicialización de Sentry usando window.APP_CONFIG -->
+<script>
+  if (window.APP_CONFIG && window.APP_CONFIG.SENTRY_DSN) {
+    Sentry.init({
+      dsn: window.APP_CONFIG.SENTRY_DSN,
+      // Opcional: ponle un nombre al entorno
+      environment: "production",
+    });
+  } else {
+    console.warn("Sentry: no hay SENTRY_DSN en window.APP_CONFIG");
+  }
+</script>
+
   
 <script src="./config.js"></script>
 
