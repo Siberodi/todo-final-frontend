@@ -45,7 +45,37 @@
     </div>
   </main>
 
-  <!-- SCRIPTS -->
+  <!-- SENTRY -->
+  <script
+  src="https://js.sentry-cdn.com/9f9d903c2e94a4916f43cf8a952c34b1.min.js"
+  crossorigin="anonymous"
+></script>
+
+  <!-- CONFIG (Sentry + GA) -->
+  <script src="./config.js"></script>
+
+  <!-- GOOGLE ANALYTICS -->
+  <script>
+    (function () {
+      var cfg = window.APP_CONFIG || {};
+      if (!cfg.GA_MEASUREMENT_ID) return;
+
+      var gtagScript = document.createElement('script');
+      gtagScript.async = true;
+      gtagScript.src =
+        'https://www.googletagmanager.com/gtag/js?id=' + cfg.GA_MEASUREMENT_ID;
+      document.head.appendChild(gtagScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+
+      gtag('js', new Date());
+      gtag('config', cfg.GA_MEASUREMENT_ID);
+    })();
+  </script>
+  
+<!-- SCRIPTS -->
   <script src="../js/auth.js" type="module"></script>
   <script src="../js/storage.js" type="module"></script>
   <script src="../js/validator.js" type="module"></script>

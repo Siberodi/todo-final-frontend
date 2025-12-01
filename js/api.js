@@ -63,6 +63,9 @@ export async function fetchExternalTodos() {
   
     } catch (e) {
       console.warn("No se pudieron traer los TODOS externos:", e?.message || e);
+      if (window.Sentry) {
+      window.Sentry.captureException(e);
+    }
       return [];
     }
   }

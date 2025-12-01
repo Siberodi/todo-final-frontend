@@ -1,11 +1,11 @@
 {
   "hosting": {
-    "site": "todo-final-frontend-a29da",
-    "public": "html",
+    "public": ".",
     "ignore": [
       "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/.git/**",
+      "**/.github/**"
     ]
   }
 }
