@@ -33,6 +33,8 @@ La aplicación está desplegada en Firebase Hosting y se puede acceder en:
 
 Usuario: admin
 Contraseña: admin
+
+
 Cada vez que se hace `git push` a la rama `main`, el proyecto se vuelve a construir y desplegar automáticamente en esta URL.
 
 ---
