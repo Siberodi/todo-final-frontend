@@ -47,52 +47,59 @@
   
 
   <!-- SENTRY -->
-  <!-- SDK de Sentry desde CDN (solo errores, sin tracing) -->
-<script
-  src="https://browser.sentry-cdn.com/7.120.0/bundle.min.js"
-  crossorigin="anonymous"
-></script>
+  <!-- 1. Configuración global (DSN + GA) -->
+  <script src="./config.js"></script>
 
-<!-- Tu configuración con la DSN -->
-<script src="/html/config.js"></script>
+  <!-- 2. SDK de Sentry desde CDN -->
+  <script
+    src="https://browser.sentry-cdn.com/7.120.0/bundle.min.js"
+    crossorigin="anonymous"
+  ></script>
 
-<!-- Inicialización de Sentry usando window.APP_CONFIG -->
-<script>
-  if (window.APP_CONFIG && window.APP_CONFIG.SENTRY_DSN) {
-    Sentry.init({
-      dsn: window.APP_CONFIG.SENTRY_DSN,
-      // Opcional: ponle un nombre al entorno
-      environment: "production",
-    });
-  } else {
-    console.warn("Sentry: no hay SENTRY_DSN en window.APP_CONFIG");
-  }
-</script>
+  <!-- 3. Inicialización de Sentry usando window.APP_CONFIG -->
+  <script>
+    console.log("APP_CONFIG en index.html:", window.APP_CONFIG);
 
-  
-<script src="./config.js"></script>
+    if (window.APP_CONFIG && window.APP_CONFIG.SENTRY_DSN) {
+      Sentry.init({
+        dsn: window.APP_CONFIG.SENTRY_DSN,
+        environment: "production",
+      });
 
-<!-- GOOGLE ANALITYCS -->
-<script>
-  (function () {
-    var cfg = window.APP_CONFIG || {};
-    if (!cfg.GA_MEASUREMENT_ID) return;
+      // ⚠️ PRUEBA DIRECTA: manda un error a Sentry al cargar la página de login
+      Sentry.captureException(
+        new Error("Error de prueba automático desde index.html (login)")
+      );
+    } else {
+      console.warn("Sentry: no hay SENTRY_DSN en window.APP_CONFIG");
+    }
+  </script>
 
-    var gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + cfg.GA_MEASUREMENT_ID;
-    document.head.appendChild(gtagScript);
+  <!-- GOOGLE ANALYTICS -->
+  <script>
+    (function () {
+      var cfg = window.APP_CONFIG || {};
+      if (!cfg.GA_MEASUREMENT_ID) return;
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    window.gtag = gtag;
+      var gtagScript = document.createElement("script");
+      gtagScript.async = true;
+      gtagScript.src =
+        "https://www.googletagmanager.com/gtag/js?id=" +
+        cfg.GA_MEASUREMENT_ID;
+      document.head.appendChild(gtagScript);
 
-    gtag('js', new Date());
-    gtag('config', cfg.GA_MEASUREMENT_ID);
-  })();
-</script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
 
-<!-- SCRIPTS -->
+      gtag("js", new Date());
+      gtag("config", cfg.GA_MEASUREMENT_ID);
+    })();
+  </script>
+
+  <!-- SCRIPTS -->
   <script src="../js/auth.js" type="module"></script>
 </body>
 </html>
